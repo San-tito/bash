@@ -401,6 +401,23 @@ int
 execute_command (command)
      COMMAND *command;
 {
+	if(command)
+	{
+		printf("type -> %i\n",(command->type));
+  		printf("command -> %s\n", make_command_string (command));
+		if(command->type == cm_connection)
+		{
+			printf("connector -> %c\n",(command->value.Connection->connector));
+			printf("first: \n");
+			execute_command(command->value.Connection->first);
+			printf("second: \n");
+			execute_command(command->value.Connection->second);
+		}
+	}
+
+	
+
+	/*
   struct fd_bitmap *bitmap;
   int result;
 
@@ -409,21 +426,18 @@ execute_command (command)
   begin_unwind_frame ("execute-command");
   add_unwind_protect (dispose_fd_bitmap, (char *)bitmap);
 
-  /* Just do the command, but not asynchronously. */
   result = execute_command_internal (command, 0, NO_PIPE, NO_PIPE, bitmap);
 
   dispose_fd_bitmap (bitmap);
   discard_unwind_frame ("execute-command");
 
 #if defined (PROCESS_SUBSTITUTION)
-  /* don't unlink fifos if we're in a shell function; wait until the function
-     returns. */
   if (variable_context == 0 && executing_list == 0)
     unlink_fifo_list ();
-#endif /* PROCESS_SUBSTITUTION */
 
   QUIT;
   return (result);
+#endif  PROCESS_SUTITUTION */
 }
 
 /* Return 1 if TYPE is a shell control structure type. */
