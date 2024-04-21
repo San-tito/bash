@@ -401,23 +401,7 @@ int
 execute_command (command)
      COMMAND *command;
 {
-	if(command)
-	{
-		printf("type -> %i\n",(command->type));
-  		printf("command -> %s\n", make_command_string (command));
-		if(command->type == cm_connection)
-		{
-			printf("connector -> %c\n",(command->value.Connection->connector));
-			printf("first: \n");
-			execute_command(command->value.Connection->first);
-			printf("second: \n");
-			execute_command(command->value.Connection->second);
-		}
-	}
 
-	
-
-	/*
   struct fd_bitmap *bitmap;
   int result;
 
@@ -430,17 +414,8 @@ execute_command (command)
 
   dispose_fd_bitmap (bitmap);
   discard_unwind_frame ("execute-command");
-<<<<<<< HEAD
 
-#if defined (PROCESS_SUBSTITUTION)
-  if (variable_context == 0 && executing_list == 0)
-    unlink_fifo_list ();
-
-=======
->>>>>>> 21dc8f13 (Santito Fix it)
-  QUIT;
   return (result);
-#endif  PROCESS_SUTITUTION */
 }
 
 /* Return 1 if TYPE is a shell control structure type. */
